@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Acadza · Report review</title>
+<style>
+:root{--bg:#0f1318;--p:#171c23;--p2:#1e2530;--b:#2a3340;--t:#e6eaf0;--m:#93a0b2;--a:#6ea8fe;--ok:#4ade80;--no:#f87171;--w:#fbbf24;--ins:#14532d;--del:#5b1d1d;color-scheme:dark}
+@media(prefers-color-scheme:light){:root{--bg:#f5f6f8;--p:#fff;--p2:#f0f2f5;--b:#d9dee6;--t:#1b2330;--m:#5b6779;--a:#1d5fd1;--ok:#15803d;--no:#b91c1c;--w:#b45309;--ins:#c9f2d6;--del:#fcd0d0;color-scheme:light}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:15px/1.5 system-ui,sans-serif;display:grid;grid-template-columns:330px 1fr;height:100vh}
+aside{border-right:1px solid var(--b);display:flex;flex-direction:column;min-height:0;background:var(--p)}
+main{overflow:auto;padding:0 0 90px}
+h1{font-size:15px;margin:0;padding:14px 16px 4px}.sub{color:var(--m);font-size:12px;padding:0 16px 10px}
+.tabs{display:flex;gap:4px;padding:0 10px 10px}.tabs button{flex:1;background:var(--p2);border:1px solid var(--b);color:var(--m);border-radius:8px;padding:6px 2px;cursor:pointer;font:inherit;font-size:12px}
+.tabs button.on{color:var(--t);border-color:var(--a)}
+#list{overflow:auto;flex:1;padding:0 10px}
+.card{display:block;width:100%;text-align:left;background:var(--p2);border:1px solid var(--b);color:inherit;border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer;font:inherit}
+.card.on{border-color:var(--a);box-shadow:0 0 0 1px var(--a)}.card small{color:var(--m)}.card b{display:block;margin:2px 0}
+.pill{display:inline-block;font-size:11px;border-radius:99px;padding:1px 8px;border:1px solid var(--b);color:var(--m);margin-right:4px}
+.pill.ok{color:var(--ok);border-color:var(--ok)}.pill.no{color:var(--no);border-color:var(--no)}.pill.w{color:var(--w);border-color:var(--w)}
+.bar{height:4px;border-radius:4px;background:var(--b);margin-top:6px}.bar i{display:block;height:100%;border-radius:4px;background:var(--w)}
+.foot{border-top:1px solid var(--b);padding:8px 12px;font-size:11px;color:var(--m)}.foot button{background:none;border:0;color:var(--a);cursor:pointer;font:inherit;padding:0}
+.wrap{max-width:980px;margin:0 auto;padding:18px 22px}
+.hd{color:var(--m);font-size:13px}.ttl{font-size:20px;margin:2px 0 10px}
+.ban{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--p);border:1px solid var(--b);border-radius:12px;padding:12px 14px}
+.ban .big{font-weight:600}.conf{width:90px;height:6px;background:var(--b);border-radius:6px}.conf i{display:block;height:100%;background:var(--ok);border-radius:6px}
+.sec{margin:18px 0 6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--m)}
+.box{background:var(--p);border:1px solid var(--b);border-radius:12px;padding:12px 14px}
+.q{font-size:17px;line-height:1.7;overflow-x:auto}.q h3{font-size:inherit;font-weight:400;margin:.3em 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.two .box{min-width:0}.lab{font-size:12px;font-weight:600;margin-bottom:6px}.lab.b{color:var(--no)}.lab.a{color:var(--ok)}
+del{background:var(--del);text-decoration:line-through;padding:0 3px;border-radius:3px}ins{background:var(--ins);text-decoration:none;padding:0 3px;border-radius:3px}
+.chip{display:inline-block;font:600 15px ui-monospace,monospace;padding:2px 10px;border-radius:8px;background:var(--p2);border:1px solid var(--b)}
+.rep{border-top:1px solid var(--b);padding:10px 0}.rep:first-child{border:0}.rep q{display:block;color:var(--m);quotes:none;margin:2px 0 6px}
+textarea{width:100%;background:var(--bg);color:var(--t);border:1px solid var(--b);border-radius:8px;padding:8px;font:inherit;min-height:56px}
+.act{position:fixed;bottom:0;left:330px;right:0;background:var(--p);border-top:1px solid var(--b);padding:10px 22px;display:flex;gap:10px;align-items:center}
+.btn{border:1px solid var(--b);background:var(--p2);color:var(--t);border-radius:9px;padding:8px 16px;cursor:pointer;font:inherit}.btn.go{background:var(--ok);border-color:var(--ok);color:#06210f;font-weight:600}.btn kbd{color:inherit;border-color:currentColor;opacity:.75}.btn.rj{color:var(--no);border-color:var(--no)}
+kbd{margin:0 2px;font-size:11px;border:1px solid var(--b);border-radius:4px;padding:0 4px;color:var(--m)}
+details summary{cursor:pointer;color:var(--m)}.mini{font-size:13px;border-top:1px solid var(--b);padding:8px 0}.mini:first-child{border:0}
+#aud{display:none;position:fixed;right:12px;bottom:60px;width:360px;max-height:50vh;overflow:auto;background:var(--p);border:1px solid var(--b);border-radius:12px;padding:12px;font-size:12px;z-index:5}
+@media(max-width:860px){body{display:block;height:auto}aside{max-height:42vh}.act{left:0}.two{grid-template-columns:1fr}}
+</style></head><body>
+<aside><h1>Report review</h1><div class="sub" id="sub"></div><div class="tabs" id="tabs"></div><div id="list"></div>
+<div class="foot">Demo loads <b>precomputed</b> AI results (no live LLM calls). Decisions and audit log are saved in this browser only. <button id="aud-b">Audit log</button> · <button id="exp">Export</button></div></aside>
+<main id="main"></main><div id="aud"></div>
+<script src="data.js"></script>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const clean=h=>(h||'').replace(/<script[\s\S]*?<\/script>/gi,'').replace(/ on\w+=("[^"]*"|'[^']*')/gi,'');
+const W={answer_key:50,unsound:45,stem_data:40,wrong_question:40,option_repair:40,identical_options:35,diagram:35,solution_fix:25,solution_missing:25,wrong_chapter:15,syllabus:10};
+const NAME={answer_key:'Wrong answer key',stem_data:'Value missing in question',option_repair:'Option missing or blank',identical_options:'Duplicate options',diagram:'Figure missing',solution_fix:'Wrong solution',wrong_chapter:'Filed under wrong chapter',syllabus:'Possibly out of syllabus',unsound:'No valid answer as written',spelling:'Spelling',exam_reference:'Exam tag in question text',markup_leak:'Raw markup visible',answer_form:'Unit not stated',notation:'Lost symbol',no_error:'Student mistake, no change',display_issue:'Display issue',app_issue:'App issue',language_mode:'Language request',already_fixed:'Already fixed',not_actionable:'Not actionable'};
+const WHY={answer_key:'a wrong key marks correct students wrong, silently',stem_data:'nobody can solve it',option_repair:'students cannot pick the right option',identical_options:'two options tie',diagram:'cannot be solved without the figure',unsound:'no option is right',solution_fix:'students learn from a wrong solution',wrong_chapter:'only mis-filed',syllabus:'faculty call'};
+let S={dec:{},aud:[],rep:{},ov:{},fd:{}};try{S=Object.assign(S,JSON.parse(localStorage.getItem('acadza')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('acadza',JSON.stringify(S))}catch(e){}};
+const cases={};
+DATA.results.forEach(r=>(cases[r.questionId]??={qid:r.questionId,items:[],finds:[]}).items.push(r));
+DATA.findings.forEach(f=>(cases[f.questionId]??={qid:f.questionId,items:[],finds:[]}).finds.push(f));
+Object.values(cases).forEach(c=>{c.q=DATA.q[c.qid];c.reports=c.items.map(r=>DATA.reports[r.reportId]);
+ const d=c.items.filter(r=>r.verdict==='defect'),fr=d.filter(r=>r.route==='faculty_review');c.main=fr.find(r=>r.edit)||fr[0]||d.find(r=>r.edit)||d[0]||null;
+ c.pend=fr[0]||null;c.kind=(c.pend||(c.finds[0]?{repair:c.finds[0].repair}:null)||c.main||{repair:c.items[0].verdict}).repair||c.items[0].verdict;
+ c.students=new Set(c.reports.map(r=>r.studentId)).size;
+ c.tab=(c.items.some(r=>r.route==='faculty_review')||c.finds.length)?'review':c.items.some(r=>r.route==='auto_apply')?'auto':'closed';
+ c.urg=c.tab==='closed'?0:(W[c.kind]??8)+6*c.students;});
+let tab='review',cur=null;
+const list=()=>Object.values(cases).filter(c=>c.tab===tab).sort((a,b)=>b.urg-a.urg);
+const pending=c=>!S.dec[c.qid];
+function side(){const n=t=>Object.values(cases).filter(c=>c.tab===t&&(t==='closed'||pending(c))).length;
+ $('#sub').textContent=`${DATA.results.length} reports → ${Object.keys(cases).length} questions. Most urgent first.`;
+ $('#tabs').innerHTML=[['review','Needs you'],['auto','Auto-applied'],['closed','No change']].map(([k,l])=>`<button class="${tab===k?'on':''}" data-t="${k}">${l} · ${n(k)}</button>`).join('');
+ $('#list').innerHTML=list().map(c=>{const d=S.dec[c.qid];return `<button class="card ${cur===c.qid?'on':''}" data-q="${c.qid}"><small>${esc(c.q.subject)} · ${esc(c.q.chapter)}</small><b>${NAME[c.kind]||c.kind}${c.finds.length&&!c.main?' (unreported)':''}</b>
+ <span class="pill">${c.reports.length} report${c.reports.length>1?'s':''}</span>${d?`<span class="pill ${d.s==='rejected'||d.s==='reverted'?'no':'ok'}">${d.s}</span>`:c.tab==='review'?'<span class="pill w">to review</span>':''}${c.urg?`<div class="bar"><i style="width:${Math.min(100,c.urg)}%"></i></div>`:''}</button>`}).join('')||'<div class="sub">Nothing here.</div>';}
+const fmt=a=>Array.isArray(a)?JSON.stringify(a):String(a);
+const text=h=>{const d=document.createElement('div');d.innerHTML=clean(h);return d.textContent.replace(/\s+/g,' ').trim()};
+const applyE=(q,e,ov)=>{const rep=ov??e.replace;if(e.field==='answer')return rep;return q[e.field].replace(e.find,rep)};
+function tdiff(a,b){let i=0;while(i<a.length&&i<b.length&&a[i]===b[i])i++;let j=0;while(j<a.length-i&&j<b.length-i&&a[a.length-1-j]===b[b.length-1-j])j++;
+ const cut=(s,l)=>s.slice(Math.max(0,i-24),i)+l+s.slice(s.length-j,s.length-j+24);return[cut(a,'<del>'+esc(a.slice(i,a.length-j))+'</del>'),cut(b,'<ins>'+esc(b.slice(i,b.length-j))+'</ins>')]}
+function show(qid){cur=qid;const c=cases[qid],q=c.q,m=c.main,e=m?.edit,d=S.dec[qid];side();
+ let h=`<div class="wrap"><div class="hd">${esc(q.subject)} · ${esc(q.chapter)} · ${q.type} · …${qid.slice(-5)}</div><div class="ttl">${NAME[c.kind]||c.kind}</div>`;
+ const p=c.pend||(c.finds.length&&!(m&&m.route==='faculty_review')?{repair:c.finds[0].repair,route:'faculty_review',evidence:c.finds[0].evidence}:null)||m||c.items[0];
+ h+=`<div class="ban"><div><div class="big">AI: ${NAME[p.repair||p.verdict]}</div><small class="hd">${p.route==='auto_apply'?'Eligible for auto-apply':p.route==='faculty_review'?'Needs a human':'No content change'}</small></div>
+ ${p.confidence?`<div><div class="conf"><i style="width:${p.confidence*100}%"></i></div><small class="hd">confidence ${Math.round(p.confidence*100)}%</small></div>`:''}
+ ${c.urg?`<small class="hd">Urgency ${c.urg}: ${WHY[c.kind]||'cosmetic'}; ${c.students} student${c.students>1?'s':''} reported</small>`:''}</div>`;
+ h+=`<div class="sec">Why the AI thinks so</div><div class="box">${esc(p.evidence)}${p.checks?.solver?`<div class="hd" style="margin-top:6px">Independent solve: <b>${esc(p.checks.solver)}</b> · stored solution agrees: ${p.checks.solution_agrees?'yes':'no'}</div>`:''}</div>`;
+ if(e){const f=e.field,ov=S.ov[qid],nv=applyE(q,e,ov);
+  h+=`<div class="sec">${m.route==='auto_apply'?'Applied automatically':'Proposed change'} · field: ${f}</div>`;
+  if(f==='answer')h+=`<div class="box"><span class="chip" style="text-decoration:line-through;color:var(--no)">${esc(fmt(q.answer))}</span> → <span class="chip" style="color:var(--ok)">${esc(fmt(nv))}</span><div class="hd" style="margin-top:6px">${q.type==='scq'?'Check against the question below.':''}</div></div>`;
+  else{const[x,y]=tdiff(text(q[f]),text(nv));h+=`<div class="box"><div class="hd">Visible-text diff</div><div>${x}</div><div>${y}</div></div>
+  <div class="two" style="margin-top:10px"><div class="box"><div class="lab b">Before</div><div class="q">${clean(q[f])}</div></div><div class="box"><div class="lab a">After</div><div class="q">${clean(nv)}</div></div></div>
+  <details style="margin-top:8px"><summary>Edit replacement HTML</summary><textarea id="ov" data-q="${qid}">${esc(ov??e.replace)}</textarea></details>`}}
+ if(!e||e.field==='answer'){h+=`<div class="sec">Question as stored</div><div class="box q">${clean(q.question)}</div>`}
+ h+=`<details style="margin-top:8px"><summary>Stored solution · key ${esc(fmt(q.answer))}</summary><div class="box q">${clean(q.solution)||'<i>none</i>'}</div></details>`;
+ if(q.hist.length)h+=`<div class="hd" style="margin-top:8px">History: ${q.hist.map(x=>esc(x.at.slice(0,10)+' '+x.actor+': '+x.note)).join('; ')}</div>`;
+ if(c.finds.length)h+=`<div class="sec">Also found (nobody reported these)</div><div class="box">${c.finds.map(f=>`<div class="mini"><b>${NAME[f.repair]}</b> · ${esc(f.evidence)} ${f.edit?`<br><code>${esc(f.edit.find)}</code> → <code>${esc(f.edit.replace)}</code>`:''}<div style="margin-top:4px">${S.fd[f.findingId]?`<span class="pill ok">${S.fd[f.findingId]}</span>`:`<button class="btn" data-f="${f.findingId}" data-s="queued for fix">Queue fix</button> <button class="btn" data-f="${f.findingId}" data-s="dismissed">Dismiss</button>`}</div></div>`).join('')}</div>`;
+ h+=`<div class="sec">Reports and what each student will see</div><div class="box">${c.items.map((r,i)=>{const rp=c.reports[i];return `<div class="rep"><small class="hd">${r.reportId} · ${rp.source} · ${rp.reportedAt.slice(0,16).replace('T',' ')}</small> <span class="pill">${NAME[r.repair||r.verdict]}</span>${r.flags?'<span class="pill no">prompt-injection attempt</span>':''}<q>${esc(rp.comment)}</q><textarea data-r="${r.reportId}">${esc(S.rep[r.reportId]??r.student_reply)}</textarea></div>`}).join('')}</div></div>`;
+ const auto=c.tab==='auto';
+ h+=`<div class="act">${d?`<span class="pill ${d.s==='rejected'||d.s==='reverted'?'no':'ok'}">${d.s}</span> <button class="btn" data-u="1">Undo decision</button>`:auto?`<span class="hd">Applied by system.</span><button class="btn go" data-d="acknowledged">Looks good <kbd>a</kbd></button><button class="btn rj" data-d="reverted">Revert <kbd>x</kbd></button>`:c.tab==='closed'?`<button class="btn go" data-d="replies sent">Send replies <kbd>a</kbd></button>`:`<button class="btn go" data-d="approved">${e?'Approve fix & send replies':'Confirm & assign'} <kbd>a</kbd></button><button class="btn rj" data-d="rejected">Reject <kbd>x</kbd></button>`}<span class="hd" style="margin-left:auto"><kbd>j</kbd><kbd>k</kbd> next / prev</span></div>`;
+ $('#main').innerHTML=h;$('#main').scrollTop=0}
+function log(qid,a,detail){S.aud.unshift({t:new Date().toISOString(),actor:'faculty',case:qid,action:a,detail});save()}
+function decide(s){const c=cases[cur];if(!c||S.dec[cur])return;S.dec[cur]={s};log(cur,s,{edit:c.main?.edit?.field||null,replacement_edited:!!S.ov[cur],replies:c.items.map(r=>({id:r.reportId,text:S.rep[r.reportId]??r.student_reply}))});save();show(cur)}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-t],[data-q],[data-d],[data-u],[data-f]');if(!t)return;
+ if(t.dataset.t){tab=t.dataset.t;side()}else if(t.dataset.q)show(t.dataset.q);else if(t.dataset.d)decide(t.dataset.d);
+ else if(t.dataset.u){log(cur,'undo '+S.dec[cur].s);delete S.dec[cur];save();show(cur)}
+ else if(t.dataset.f){S.fd[t.dataset.f]=t.dataset.s;log(cur,'finding '+t.dataset.f+' '+t.dataset.s);save();show(cur)}});
+document.addEventListener('input',e=>{const t=e.target;if(t.dataset.r){S.rep[t.dataset.r]=t.value;save()}if(t.id==='ov'){S.ov[t.dataset.q]=t.value;save();clearTimeout(window._t);window._t=setTimeout(()=>{const y=$('#main').scrollTop;show(cur);$('#main').scrollTop=y;document.querySelector('details textarea')?.closest('details')&&(document.querySelector('#ov').closest('details').open=true)},600)}});
+document.addEventListener('keydown',e=>{if(/TEXTAREA|INPUT/.test(e.target.tagName))return;const l=list(),i=l.findIndex(c=>c.qid===cur);
+ if(e.key==='j')show(l[Math.min(l.length-1,i+1)].qid);if(e.key==='k')show(l[Math.max(0,i-1)].qid);if(e.key==='a')$('[data-d].go')?.click();if(e.key==='x')$('[data-d].rj')?.click()});
+$('#aud-b').onclick=()=>{const a=$('#aud');a.style.display=a.style.display==='block'?'none':'block';a.innerHTML=S.aud.length?S.aud.map(x=>`<div class="mini"><b>${x.action}</b> · …${x.case.slice(-5)}<br><small>${x.t.slice(0,19).replace('T',' ')} · ${x.actor}</small></div>`).join(''):'No actions yet.'};
+$('#exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S.aud,null,1)],{type:'application/json'}));a.download='audit-log.json';a.click()};
+side();const f=list()[0];if(f)show(f.qid);
+</script></body></html>

@@ -1,0 +1,90 @@
+[
+ {
+  "questionId": "617fa18efd53ff1629ed890f",
+  "repair": "spelling",
+  "edit": {
+   "field": "question",
+   "find": "part of<span style=\"color:#000000\">leaf",
+   "replace": "part of <span style=\"color:#000000\">leaf"
+  },
+  "evidence": "Missing space renders as 'ofleaf' (found while handling R013).",
+  "findingId": "F01",
+  "route": "faculty_review",
+  "verdict": "defect",
+  "unreported": true
+ },
+ {
+  "questionId": "6264197209f4fd65f58f5707",
+  "repair": "spelling",
+  "edit": {
+   "field": "question",
+   "find": "Canolla",
+   "replace": "Canola"
+  },
+  "evidence": "Option B misspelt 'Canolla'; the solution text also runs words together ('producebeta-carotene', 'tonight blindness').",
+  "findingId": "F02",
+  "route": "faculty_review",
+  "verdict": "defect",
+  "unreported": true
+ },
+ {
+  "questionId": "66fe9dbe22132e5a70a3e579",
+  "repair": "solution_fix",
+  "edit": null,
+  "evidence": "Stored solution says insulin and glucagon 'work synergistically'. They are antagonistic. Key D is still right, but the solution teaches a wrong fact.",
+  "findingId": "F03",
+  "route": "faculty_review",
+  "verdict": "defect",
+  "unreported": true
+ },
+ {
+  "questionId": "695ee00b88d7701e561aabc5",
+  "repair": "unsound",
+  "edit": null,
+  "evidence": "Solution uses I = 2 I0 cos^2(phi/2); the correct form is 4 I0 cos^2(phi/2), so the 'I = I0' step is wrong. See R034.",
+  "findingId": "F04",
+  "route": "faculty_review",
+  "verdict": "defect",
+  "unreported": true
+ },
+ {
+  "questionId": "68f21caf941cda588bc04365",
+  "repair": "wrong_chapter",
+  "edit": null,
+  "evidence": "Radioactive decay / mean life is filed under 'Mathematics in physics'; it belongs in Nuclear physics and radioactivity.",
+  "findingId": "F05",
+  "route": "faculty_review",
+  "verdict": "defect",
+  "unreported": true
+ },
+ {
+  "questionId": "6956d7e988d7701e5617bd3e",
+  "repair": "notation",
+  "edit": null,
+  "evidence": "Solution has operators garbled ('v-dx/dt-A w cos wt', 'pi = A x pi/8 x cos(pi)/(8) x 2'). Final answer 8 sqrt2 is right, but the steps are unreadable.",
+  "findingId": "F06",
+  "route": "faculty_review",
+  "verdict": "defect",
+  "unreported": true
+ },
+ {
+  "questionId": "68dea7c2387eea3d0d95f9bb",
+  "repair": "solution_fix",
+  "edit": null,
+  "evidence": "Question asks the shift in cm and the key is 8, but the solution ends '= 0.08 m' with no conversion step. This is what confused R032.",
+  "findingId": "F07",
+  "route": "faculty_review",
+  "verdict": "defect",
+  "unreported": true
+ },
+ {
+  "questionId": "61ee6c9d90a1a968a168686b",
+  "repair": "spelling",
+  "edit": null,
+  "evidence": "Solution typos: 'prominant', 'Maceus membrane' (Mucous). Reported typo was only in option D.",
+  "findingId": "F08",
+  "route": "faculty_review",
+  "verdict": "defect",
+  "unreported": true
+ }
+]
